@@ -57,23 +57,8 @@ namespace DutiesSendService
                             var pdfDuty =
                                 pdf.SaveDutyPDFLocally(document, tempDirectory, $"{duty.PhoneLine}_{duty.Service}");
 
-                            var bodyAndSubject = string.Empty;
-
-                            switch (sheet.name)
-                            {
-                                case "tks":
-                                    bodyAndSubject = "ТКС";
-                                    break;
-                                case "tis":
-                                    bodyAndSubject = "ТИС";
-                                    break;
-                                case "b2c":
-                                    bodyAndSubject = "ЮКОМ";
-                                    break;
-                            }
-
-                            bodyAndSubject +=
-                                $" {duty.PhoneLine}; {duty.CustomerAddress}; {duty.Service}; {duty.NotesFromUkt}; Включить до {duty.ExpirationDate}";
+                            var bodyAndSubject =
+                                $"{sheet.bodyAndSubjectStart} {duty.PhoneLine}; {duty.CustomerAddress}; {duty.Service}; {duty.NotesFromUkt}; Включить до {duty.ExpirationDate}";
 
                             emailService.SendEmail(sheet.receiver, bodyAndSubject, bodyAndSubject, pdfDuty);
 
