@@ -8,7 +8,7 @@ namespace DutiesSendService
 {
     public class AppConfiguration
     {
-        public string errorReceiver { get; set; }
+        public List<string> errorReceivers { get; set; }
         public SmtpConfiguration smtp { get; set; }
         public EmailConfiguration sender { get; set; }
         public List<AccessAccountConfiguration> accessAccounts { get; set; }

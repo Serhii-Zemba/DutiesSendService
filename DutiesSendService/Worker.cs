@@ -86,7 +86,12 @@ namespace DutiesSendService
                 catch (Exception ex)
                 {
                     var exceptionMsg = new LogUtility().BuildExceptionMessage(ex);
-                    emailService.SendEmail(config.errorReceiver, "Google Sheets App Error", exceptionMsg, null, EmailService.EmailType.Error);
+
+                    foreach (var receiver in config.errorReceivers)
+                    {
+                        emailService.SendEmail(receiver, "Google Sheets App Error", exceptionMsg, null, EmailService.EmailType.Error);
+                    }
+
                     errorCount++;
                     if (errorCount == 10)
                     {
