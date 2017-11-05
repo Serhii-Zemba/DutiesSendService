@@ -25,6 +25,8 @@ namespace DutiesSendService
 
         public void Start()
         {
+            var errorCount = 0;
+
             while (true)
             {
                 var emailService = new EmailService
@@ -57,10 +59,21 @@ namespace DutiesSendService
                             var pdfDuty =
                                 pdf.SaveDutyPDFLocally(document, tempDirectory, $"{duty.PhoneLine}_{duty.Service}");
 
-                            var bodyAndSubject =
-                                $"{sheet.bodyAndSubjectStart} {duty.PhoneLine}; {duty.CustomerAddress}; {duty.Service}; {duty.NotesFromUkt}; Включить до {duty.ExpirationDate}";
+                            var notesForSubject = duty.NotesFromUkt.Length > 60
+                                ? duty.NotesFromUkt.Substring(0, 60)
+                                : duty.NotesFromUkt;
+                            var customerId = $"{duty.PhoneLine}";
+                            if (duty.PhoneLine.Trim().ToLower() == "нс")
+                            {
+                                customerId += $" Л/С {duty.Account}";
+                            }
+                            var subject =
+                                $"{sheet.bodyAndSubjectStart} {customerId}; {duty.CustomerAddress}; {duty.Service}; {notesForSubject}; Включить до {duty.ExpirationDate}";
 
-                            emailService.SendEmail(sheet.receiver, bodyAndSubject, bodyAndSubject, pdfDuty);
+                            var body =
+                                $"{sheet.bodyAndSubjectStart} {customerId}; {duty.CustomerAddress}; {duty.Service}; {duty.NotesFromUkt}; Включить до {duty.ExpirationDate}";
+
+                            emailService.SendEmail(sheet.receiver, subject, body, pdfDuty, EmailService.EmailType.Duty);
 
                             sheetsApi.UpdateDutyStatus(sheet.sheetId, sheet.sheetName, $"V{duty.RowNumber}");
                         }
@@ -73,7 +86,12 @@ namespace DutiesSendService
                 catch (Exception ex)
                 {
                     var exceptionMsg = new LogUtility().BuildExceptionMessage(ex);
-                    emailService.SendEmail(config.errorReceiver, "Google Sheets App Error", exceptionMsg, null);
+                    emailService.SendEmail(config.errorReceiver, "Google Sheets App Error", exceptionMsg, null, EmailService.EmailType.Error);
+                    errorCount++;
+                    if (errorCount == 10)
+                    {
+                        throw ex;
+                    }
                 }
             }
         } 
