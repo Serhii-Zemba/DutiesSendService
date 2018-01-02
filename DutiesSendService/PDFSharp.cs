@@ -313,9 +313,11 @@ namespace DutiesSendService
             paragraph.Format.Font.Size = "10pt";
             paragraph.Format.Font.Italic = true;
 
-            paragraph = row.Cells[0].AddParagraph("Претензій та зауважень не маю");
-            paragraph.Format.Font.Size = "10pt";
-            text = paragraph.AddFormattedText("\t__________________\t\t");
+            paragraph = row.Cells[0].AddParagraph("Претензій та зауважень щодо прокладання кабелю,");
+            paragraph.Format.Font.Size = "9pt";
+            paragraph = row.Cells[0].AddParagraph("підключення послуги та демонстрації сервіса  не маю");
+            paragraph.Format.Font.Size = "9pt";
+            text = paragraph.AddFormattedText("\t__________________\t");
             text.Font.Size = "11pt";
             text = paragraph.AddFormattedText($"{duty.CustomerName}");
             text.Font.Size = "11pt";
@@ -326,9 +328,9 @@ namespace DutiesSendService
             text = paragraph.AddFormattedText("Підпис уповноваженої особи");
             text.Font.Size = "9pt";
             text.Font.Italic = true;
-            text = paragraph.AddFormattedText(")\t\t");
+            text = paragraph.AddFormattedText(")\t\t\t\t");
             text.Font.Size = "10pt";
-            text = paragraph.AddFormattedText("підпис\t\t\t\t\tП.І.Б.");
+            text = paragraph.AddFormattedText("підпис\t\t\t\tП.І.Б.");
             text.Font.Size = "10pt";
             text.Font.Italic = true;
 
