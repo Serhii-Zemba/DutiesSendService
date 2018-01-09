@@ -300,15 +300,10 @@ namespace DutiesSendService
             row.Cells[0].AddParagraph();
             row.Cells[0].AddParagraph();
 
-            var customerNameParts = duty.CustomerName.Split(' ');
-            var customerShortenedName = $"{customerNameParts[0]} {customerNameParts[1].Substring(0, 1)}.{customerNameParts[2].Substring(0, 1)}.";
-
-            paragraph = row.Cells[0].AddParagraph("Підпис Абонента\t\t\t\t__________________\t\t");
+            paragraph = row.Cells[0].AddParagraph("Підпис Абонента\t\t\t\t__________________\t\t__________________");
             paragraph.Format.Font.Size = "11pt";
-            text = paragraph.AddFormattedText($"{customerShortenedName}");
-            text.Font.Underline = Underline.Single;
 
-            paragraph = row.Cells[0].AddParagraph("\t\t\t\t\t\t\tпідпис");
+            paragraph = row.Cells[0].AddParagraph("\t\t\t\t\t\t\tпідпис\t\t\t\tП.І.Б.");
             paragraph.Format.Font.Size = "10pt";
             paragraph.Format.Font.Italic = true;
 
@@ -320,11 +315,8 @@ namespace DutiesSendService
             paragraph.Format.Font.Size = "9pt";
             paragraph = row.Cells[0].AddParagraph("підключення послуги та демонстрації сервіса  не маю");
             paragraph.Format.Font.Size = "9pt";
-            text = paragraph.AddFormattedText("\t__________________\t\t");
+            text = paragraph.AddFormattedText("\t__________________\t\t__________________");
             text.Font.Size = "11pt";
-            text = paragraph.AddFormattedText($"{customerShortenedName}");
-            text.Font.Size = "11pt";
-            text.Font.Underline = Underline.Single;
 
             paragraph = row.Cells[0].AddParagraph("(");
             paragraph.Format.Font.Size = "10pt";
@@ -333,7 +325,7 @@ namespace DutiesSendService
             text.Font.Italic = true;
             text = paragraph.AddFormattedText(")\t\t\t\t");
             text.Font.Size = "10pt";
-            text = paragraph.AddFormattedText("підпис");
+            text = paragraph.AddFormattedText("підпис\t\t\t\tП.І.Б.");
             text.Font.Size = "10pt";
             text.Font.Italic = true;
 
