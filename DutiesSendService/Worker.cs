@@ -55,7 +55,7 @@ namespace DutiesSendService
 
                         foreach (var duty in newDuties)
                         {
-                            var document = pdf.CreateDutyPDF(duty, sheet.tableHeader);
+                            var document = pdf.CreateDutyPDF2(duty, sheet);
                             var pdfDuty =
                                 pdf.SaveDutyPDFLocally(document, tempDirectory, $"{duty.PhoneLine}_{duty.Service}");
 

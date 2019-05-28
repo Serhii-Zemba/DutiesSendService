@@ -43,5 +43,6 @@ namespace DutiesSendService
         public string tableHeader { get; set; }
         public int accessAccountId { get; set; }
         public string bodyAndSubjectStart { get; set; }
+        public string fullName { get; set; }
     }
 }
