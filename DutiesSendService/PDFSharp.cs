@@ -446,6 +446,8 @@ namespace DutiesSendService
             paragraph.Format.Font.Name = "Times New Roman";
             paragraph.Format.Font.Size = Unit.FromPoint(10);
             paragraph.AddText("Роботи виконані в повному обсязі");
+            var str = paragraph.AddFormattedText("\t\t\t\t\tSPEEDTEST: Download______________ Upload______________");
+            str.Font.Size = Unit.FromPoint(8);
             section.AddParagraph();
             paragraph = section.AddParagraph("Претензій та зауважень щодо прокладання кабелю,\tАбонент_________________/_______________________/");
             paragraph.Format.Font.Name = "Times New Roman";
@@ -454,12 +456,12 @@ namespace DutiesSendService
             paragraph.Format.Font.Name = "Times New Roman";
             paragraph.Format.Font.Size = Unit.FromPoint(10);
 
-            var str = paragraph.AddFormattedText("\t\t\t(Підпис)");
+            str = paragraph.AddFormattedText("\t\t\t(Підпис)");
             str.Font.Name = "Times New Roman";
             str.Font.Size = Unit.FromPoint(9);
             str.Font.Italic = true;
 
-            paragraph = section.AddParagraph("\t\t\t\t\t\t\t«________» _____________________ 20____ року");
+            paragraph = section.AddParagraph("Роботи виконанувались з використанням ЗІЗ\t\t«________» _____________________ 20____ року");
             paragraph.Format.Font.Name = "Times New Roman";
             paragraph.Format.Font.Size = Unit.FromPoint(10);
             section.AddParagraph();
